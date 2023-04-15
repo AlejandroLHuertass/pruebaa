@@ -19,8 +19,8 @@
 			<h3>Prize value:</h3>
 			<p:outputLabel value="#{guessBean.getPrize()}"/>
 			<h3>Enter a number:</h3>
-			<h:inputText id="lista" type="text" binding="#{input}" />
-			<p:commandButton value="Submit" update="guess_form" actionListener="#{guessBean.gues(input.value)}"/>
+			<p:inputText binding="#{number}"/>
+			<p:commandButton value="Submit" update="guess_form" actionListener="#{guessBean.gues(number.value)}"/>
 			<p:commandButton value="Reset" update="guess_form" actionListener="#{guessBean.reset()}"/>
 		</h:form>
 	</h:body>

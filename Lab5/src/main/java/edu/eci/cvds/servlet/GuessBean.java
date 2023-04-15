@@ -25,35 +25,28 @@ public class GuessBean{
 		setNewNumber();
 	}
 	
-	public void gues(String value){
+	public void gues(int numberChoosen){
+		userNumbers.add(numberChoosen);
 		
-		try{ 
-			int numberChoosen = Integer.parseInt(value);
-            userNumbers.add(numberChoosen);
-			if ((getPrize() <= 0 || getAttempts() <= 1) && this.gameState == gameStates[2]){
-				setGameState("L");
-				this.prize = 0;
+
+		if ((getPrize() <= 0 || getAttempts() <= 1) && this.gameState == gameStates[2]){
+			setGameState("L");
+			this.prize = 0;
+		}else{
+
+			if (numberChoosen == getCurrentGuessNumber() && getAttempts() == 5){
+				this.prize = getPrize() + 100000;
+				setGameState("W");
+			}
+			if (numberChoosen == getCurrentGuessNumber()){
+				setGameState("W");
 			}
 			else{
-
-				if (numberChoosen == getCurrentGuessNumber() && getAttempts() == 5){
-					this.prize = getPrize() + 100000;
-					setGameState("W");
-				}
-				if (numberChoosen == getCurrentGuessNumber()){
-					setGameState("W");
-				}
-				else{
-					this.prize = getPrize() - 10000;
-				}
+				this.prize = getPrize() - 10000;
 			}
-			setAttempts(getAttempts() - 1);           
-        }
-        catch (Exception e){
-            reset();
-        }
-    }
-	
+		}
+		setAttempts(getAttempts() - 1);
+	}
 	
 	
 	public void reset(){
